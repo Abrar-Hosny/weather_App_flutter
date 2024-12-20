@@ -1,6 +1,8 @@
 // lib/screens/auth/signup_screen.dart
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
+import 'weather_details_screen.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -120,7 +122,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 24),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const WeatherDetailsScreen(),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[300],
                     minimumSize: const Size(double.infinity, 50),
