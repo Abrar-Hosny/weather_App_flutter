@@ -57,7 +57,7 @@ class OnboardingScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                          builder: (_) => const OnboardingScreen()),
+                          builder: (_) => const WeatherDetailsScreen()),
                     );
                   },
                 ),
