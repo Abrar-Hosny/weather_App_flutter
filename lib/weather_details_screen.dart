@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'settings.dart';
+
 class WeatherDetailsScreen extends StatelessWidget {
   const WeatherDetailsScreen({super.key});
 
@@ -217,7 +219,12 @@ class WeatherDetailsScreen extends StatelessWidget {
                     ),
                     IconButton(
                       icon: const Icon(Icons.settings, color: Colors.white54, size: 30),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                              builder: (_) => const SettingsScreen()),
+                        );
+                      },
                     ),
                   ],
                 ),
