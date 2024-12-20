@@ -70,7 +70,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const SizedBox(height: 40),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
@@ -97,32 +98,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 78),
               Container(
                 padding: const EdgeInsets.all(20),
-
-                child:  Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.home, color: Colors.white54, size: 30),
+                      icon: const Icon(Icons.home,
+                          color: Colors.white54, size: 30),
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                               builder: (_) => const WeatherDetailsScreen()),
-                        );
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.search, color: Colors.white54, size: 30),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.settings, color: Colors.blue, size: 30),
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                              builder: (_) => const SettingsScreen()),
                         );
                       },
                     ),
