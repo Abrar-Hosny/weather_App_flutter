@@ -2,8 +2,7 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'gradient_button.dart';
-import 'signup_screen.dart';
-
+import 'weather_details_screen.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -30,7 +29,7 @@ class OnboardingScreen extends StatelessWidget {
               children: [
                 const Spacer(),
                 Image.asset(
-                  'Weather.png',
+                  'assets/Weather.png',
                   width: 150,
                   height: 150,
                 ),
@@ -57,11 +56,11 @@ class OnboardingScreen extends StatelessWidget {
                   text: 'Get Started',
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (_) => const SignUpScreen()),
+                      MaterialPageRoute(
+                          builder: (_) => const OnboardingScreen()),
                     );
                   },
                 ),
-
                 const SizedBox(height: 48),
               ],
             ),
