@@ -12,12 +12,13 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     initialRoute: '/signup',
     routes: {
-      '/login': (context) => const LoginScreen(),
-      '/signup': (context) => const SignUpScreen(),
-      '/weather_details': (context) => const WeatherDetailsScreen(),
-      '/weather_forecast_next': (context) => WeatherForecastNext(),
+      '/login': (context) => SafeArea(child: const LoginScreen()),
+      '/signup': (context) => SafeArea(child: const SignUpScreen()),
+      '/weather_details': (context) => SafeArea(child: const WeatherDetailsScreen()),
+      '/weather_forecast_next': (context) => SafeArea(child: WeatherForecastNext()),
     },
   ));
 }
