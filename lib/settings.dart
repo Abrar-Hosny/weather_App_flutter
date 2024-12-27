@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'weather_details_screen.dart';
+import '/services/auth_service.dart';
+import '/login_screen.dart'; 
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -10,6 +12,25 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool isDarkMode = true;
+  final _authService = AuthService();
+
+  Future<void> _handleSignOut() async {
+    try {
+      await _authService.signOut();
+      if (mounted) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+          (route) => false,
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error signing out: ${e.toString()}')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +97,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: Colors.white.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                 ),
-
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: const Icon(Icons.logout, color: Colors.white),
+                      title: const Text(
+                        'Sign Out',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onTap: _handleSignOut,
+                    ),
+                    // You can add more settings options here
+                  ],
+                ),
               ),
-              const SizedBox(height: 78),
+              const Spacer(),
               Container(
                 padding: const EdgeInsets.all(20),
                 child: Row(
@@ -92,6 +125,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           MaterialPageRoute(
                               builder: (_) => const WeatherDetailsScreen()),
                         );
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.settings,
+                          color: Colors.white, size: 30),
+                      onPressed: () {
+                        // Already on settings screen
                       },
                     ),
                   ],
