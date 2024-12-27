@@ -14,7 +14,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF2C1F63),
+      backgroundColor: isDarkMode ? const Color(0xFF2C1F63) : Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -22,10 +22,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              const Text(
+              Text(
                 'Settings',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: isDarkMode ? Colors.white : Colors.black,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -40,10 +40,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         gradient: LinearGradient(
-                          colors: [
-                            Colors.blue.shade400,
-                            Colors.purple.shade400,
-                          ],
+                          colors: isDarkMode
+                              ? [Colors.blue.shade400, Colors.purple.shade400]
+                              : [Colors.blue.shade200, Colors.purple.shade200],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -57,10 +56,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
+                    Text(
                       'Me',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: isDarkMode ? Colors.white : Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
                       ),
@@ -70,47 +69,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               const SizedBox(height: 40),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  color: isDarkMode
+                      ? Colors.white.withOpacity(0.1)
+                      : Colors.black.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                 ),
-
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Dark Mode',
+                      style: TextStyle(
+                        color: isDarkMode ? Colors.white : Colors.black,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Switch(
+                      value: isDarkMode,
+                      onChanged: (value) {
+                        setState(() {
+                          isDarkMode = value;
+                        });
+                      },
+                      activeColor: Colors.blue,
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 78),
+              const Spacer(),
               Container(
                 padding: const EdgeInsets.all(20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.home,
-                          color: Colors.white54, size: 30),
+                      icon: const Icon(Icons.home, size: 30),
+                      color: isDarkMode ? Colors.white54 : Colors.black54,
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (_) => const WeatherDetailsScreen()),
+                            builder: (_) => const WeatherDetailsScreen(),
+                          ),
                         );
                       },
                     ),
-<<<<<<< HEAD
                     IconButton(
-                      icon: const Icon(Icons.search,
-                          color: Colors.white54, size: 30),
-                      onPressed: _showSearchDialog,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.settings, color: Colors.blue, size: 30),
+                      icon: const Icon(Icons.settings, size: 30),
+                      color: isDarkMode ? Colors.blue : Colors.black,
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
-                              builder: (_) => const SettingsScreen()),
+                            builder: (_) => const SettingsScreen(),
+                          ),
                         );
                       },
                     ),
-=======
->>>>>>> bdcd8273860d131d68f3033afe04bf1ac1ec7058
                   ],
                 ),
               ),
