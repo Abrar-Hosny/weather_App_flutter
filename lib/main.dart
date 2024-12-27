@@ -18,7 +18,6 @@ void main() async {
       '/signup': (context) => const SignUpScreen(),
       '/weather_details': (context) => const WeatherDetailsScreen(),
       '/weather_forecast_next': (context) => WeatherForecastNext(),
-      // '/home': (context) => const HomeScreen(),
     },
   ));
 }
