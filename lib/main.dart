@@ -1,6 +1,6 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
-import 'splash_screen.dart';
+import 'signup_screen.dart';
 
 
 void main() {
@@ -18,7 +18,7 @@ class WeatherApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Roboto',
       ),
-      home: const SplashScreen(),
+      home: const SignUpScreen(),
     );
   }
 }

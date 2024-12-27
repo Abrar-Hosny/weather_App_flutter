@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'settings.dart';
 
 class WeatherService {
   final String apiKey = '18feae854691456cb6c114106232710';
@@ -260,10 +261,16 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                                 onPressed: _showSearchDialog,
                               ),
                               IconButton(
-                                icon: const Icon(Icons.refresh,
+                                icon: const Icon(Icons.settings,
                                     color: Colors.white54, size: 30),
-                                onPressed: () => _loadWeatherData(
-                                    _weatherData?.location ?? 'Alexandria'),
+                                onPressed: () =>
+                                {
+                                Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                builder: (_) => const SettingsScreen()),
+                                )
+                                }
+
                               ),
                             ],
                           ),

@@ -75,27 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   color: Colors.white.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Dark Mode',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Switch(
-                      value: isDarkMode,
-                      onChanged: (value) {
-                        setState(() {
-                          isDarkMode = value;
-                        });
-                      },
-                      activeColor: Colors.blue,
-                    ),
-                  ],
-                ),
+
               ),
               const Spacer(),
               Container(
@@ -114,8 +94,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                     ),
                     IconButton(
-                      icon: const Icon(Icons.search, color: Colors.white54, size: 30),
-                      onPressed: () {},
+                      icon: const Icon(Icons.search,
+                          color: Colors.white54, size: 30),
+                      onPressed: _showSearchDialog,
                     ),
                     IconButton(
                       icon: const Icon(Icons.settings, color: Colors.blue, size: 30),
