@@ -2,8 +2,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+import 'settings_screen.dart';
+=======
 import 'settings.dart';
 import 'package:weather_app/settings.dart';
+>>>>>>> b26844a58510f36a3ca6791a96809e9939d80602
 
 class WeatherService {
   final String apiKey = '18feae854691456cb6c114106232710';
@@ -112,9 +116,7 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
         ),
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            onPressed: () => Navigator.pop(context),
             child: const Text('Cancel'),
           ),
           TextButton(
@@ -146,23 +148,62 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
         child: SafeArea(
           child: _isLoading
               ? const Center(
-                  child: CircularProgressIndicator(color: Colors.white))
+              child: CircularProgressIndicator(color: Colors.white))
               : _error.isNotEmpty
-                  ? Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Error: Location Not Found',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          const SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: () => _showSearchDialog(),
-                            child: const Text('Try Again'),
-                          ),
-                        ],
+              ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  _error,
+                  style: const TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _showSearchDialog,
+                  child: const Text('Try Again'),
+                ),
+              ],
+            ),
+          )
+              : RefreshIndicator(
+            onRefresh: () => _loadWeatherData(
+                _weatherData?.location ?? 'Alexandria'),
+            color: Colors.white,
+            backgroundColor: Color(0xFF2C1F63),
+            child: ListView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(20.0),
+              children: [
+                Text(
+                  _weatherData?.location ?? '',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.network(
+                        'https:${_weatherData?.icon}',
+                        width: 120,
+                        height: 120,
                       ),
+<<<<<<< HEAD
+                      const SizedBox(height: 20),
+                      Text(
+                        '${_weatherData?.temperature.round()}°',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 64,
+                          fontWeight: FontWeight.bold,
+                        ),
+=======
                     )
                   : RefreshIndicator(
                       onRefresh: () => _loadWeatherData(
@@ -276,52 +317,23 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                             ],
                           ),
                         ],
+>>>>>>> b26844a58510f36a3ca6791a96809e9939d80602
                       ),
-                    ),
+                      Text(
+                        _weatherData?.condition ?? '',
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
-    );
-  }
-}
-
-class WeatherMetric extends StatelessWidget {
-  final IconData icon;
-  final String value;
-  final String label;
-
-  const WeatherMetric({
-    super.key,
-    required this.icon,
-    required this.value,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(
-          icon,
-          color: Colors.white70,
-          size: 24,
-        ),
-        const SizedBox(height: 8),
-        Text(
-          value,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.white70,
-            fontSize: 14,
-          ),
-        ),
-      ],
     );
   }
 }
