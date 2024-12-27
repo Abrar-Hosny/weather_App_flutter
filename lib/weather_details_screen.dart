@@ -2,11 +2,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'settings.dart';
 =======
 import 'package:weather_app/settings.dart';
->>>>>>> bdcd8273860d131d68f3033afe04bf1ac1ec7058
 
 class WeatherService {
   final String apiKey = '18feae854691456cb6c114106232710';

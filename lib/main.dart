@@ -1,24 +1,7 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
-import 'signup_screen.dart';
+import 'weather_forecast_next.dart';
 
 void main() {
-  runApp(const WeatherApp());
+  runApp(WeatherForecastNext());
 }
 
-class WeatherApp extends StatelessWidget {
-  const WeatherApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Weather App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Roboto',
-      ),
-      home: const SignUpScreen(),
-    );
-  }
-}
