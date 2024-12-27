@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'app_colors.dart'; // Import the AppColors class
+import 'app_colors.dart';
+import 'settings_screen.dart';
+import 'weather_details_screen.dart';
+import 'package:provider/provider.dart';
+import 'providers/theme_provider.dart';
 
 class WeatherForecastNext extends StatefulWidget {
+  const WeatherForecastNext({Key? key}) : super(key: key);
+
   @override
   _WeatherForecastNextState createState() => _WeatherForecastNextState();
 }
@@ -56,17 +62,22 @@ class _WeatherForecastNextState extends State<WeatherForecastNext> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+
     return MaterialApp(
+      theme: ThemeData(
+        brightness: isDarkMode ? Brightness.dark : Brightness.light,
+      ),
       home: Scaffold(
         body: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                AppColors.gradientStart,
-                AppColors.gradientEnd,
-              ],
+              colors: isDarkMode
+                  ? [const Color(0xFF2C1F63), const Color(0xFF1B1347)]
+                  : [Colors.white, Colors.white],
             ),
           ),
           child: Padding(
@@ -75,16 +86,35 @@ class _WeatherForecastNextState extends State<WeatherForecastNext> {
               children: [
                 TextField(
                   onSubmitted: updateCity,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: isDarkMode ? Colors.white : Colors.black87,
+                  ),
                   decoration: InputDecoration(
                     labelText: 'Enter city name',
-                    labelStyle: TextStyle(color: Colors.white70),
-                    suffixIcon: Icon(Icons.search, color: Colors.white70),
+                    labelStyle: TextStyle(
+                      color: isDarkMode ? Colors.white70 : Colors.black54,
+                    ),
+                    suffixIcon: Icon(
+                      Icons.search,
+                      color: isDarkMode ? Colors.white70 : Colors.black54,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: isDarkMode ? Colors.white30 : Colors.black26,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: isDarkMode ? Colors.white : Colors.black87,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
                 if (isLoading)
-                  Center(child: CircularProgressIndicator())
+                  CircularProgressIndicator(
+                    color: isDarkMode ? Colors.white : Colors.black87,
+                  )
                 else if (errorMessage != null)
                   Center(
                     child: Text(
@@ -96,7 +126,9 @@ class _WeatherForecastNextState extends State<WeatherForecastNext> {
                     Center(
                       child: Text(
                         'No data available',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: isDarkMode ? Colors.white : Colors.black87,
+                        ),
                       ),
                     )
                   else
@@ -105,16 +137,22 @@ class _WeatherForecastNextState extends State<WeatherForecastNext> {
                         children: [
                           Text(
                             'Today',
-                            style: TextStyle(fontSize: 24, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: isDarkMode ? Colors.white : Colors.black87,
+                            ),
                           ),
                           SizedBox(height: 20),
-                          buildHourlyForecast(),
+                          buildHourlyForecast(isDarkMode),
                           SizedBox(height: 30),
                           Text(
                             'Next Forecast',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: isDarkMode ? Colors.white : Colors.black87,
+                            ),
                           ),
-                          buildNextDaysForecast(),
+                          buildNextDaysForecast(isDarkMode),
                         ],
                       ),
                     ),
@@ -122,11 +160,52 @@ class _WeatherForecastNextState extends State<WeatherForecastNext> {
             ),
           ),
         ),
+        bottomNavigationBar:
+        Container(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.home, size: 30),
+                color: isDarkMode ? Colors.white54 : Colors.black54,
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) => const WeatherDetailsScreen(),
+                    ),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.article, size: 30),
+                color: isDarkMode ? Colors.white54 : Colors.black54,
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) =>  WeatherForecastNext(),
+                    ),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.settings, size: 30),
+                color: isDarkMode ? Colors.blue : Colors.black,
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) =>  SettingsScreen(),
+                    ),
+                  );},
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  Widget buildHourlyForecast() {
+  Widget buildHourlyForecast(bool isDarkMode) {
     List<dynamic> hourly = weatherData!['forecast']['forecastday'][0]['hour'].sublist(0, 6);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -137,16 +216,22 @@ class _WeatherForecastNextState extends State<WeatherForecastNext> {
           children: [
             Text(
               '${data['temp_c']}°C',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                color: isDarkMode ? Colors.white : Colors.black87,
+              ),
             ),
             Image.network('https:${data['condition']['icon']}', width: 40),
             Text(
               '$time',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(
+                color: isDarkMode ? Colors.white70 : Colors.black54,
+              ),
             ),
             Text(
               '$condition',
-              style: TextStyle(color: Colors.white54),
+              style: TextStyle(
+                color: isDarkMode ? Colors.white54 : Colors.black45,
+              ),
             ),
           ],
         );
@@ -154,7 +239,7 @@ class _WeatherForecastNextState extends State<WeatherForecastNext> {
     );
   }
 
-  Widget buildNextDaysForecast() {
+  Widget buildNextDaysForecast(bool isDarkMode) {
     List<dynamic> daily = weatherData!['forecast']['forecastday'];
     return Column(
       children: daily.map((data) {
@@ -165,15 +250,21 @@ class _WeatherForecastNextState extends State<WeatherForecastNext> {
         return ListTile(
           title: Text(
             '$day',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black87,
+            ),
           ),
           subtitle: Text(
             'Sunrise: $sunrise, Sunset: $sunset\n$condition',
-            style: TextStyle(color: Colors.white70),
+            style: TextStyle(
+              color: isDarkMode ? Colors.white70 : Colors.black54,
+            ),
           ),
           trailing: Text(
             '${data['day']['avgtemp_c']}°C',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: isDarkMode ? Colors.white : Colors.black87,
+            ),
           ),
           leading: Image.network('https:${data['day']['condition']['icon']}', width: 40),
         );

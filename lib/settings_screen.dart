@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/theme_provider.dart';
 import 'weather_details_screen.dart';
+import 'weather_forecast_next.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  bool isDarkMode = true;
-
-  @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xFF2C1F63) : Colors.white,
       body: SafeArea(
@@ -89,9 +88,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Switch(
                       value: isDarkMode,
                       onChanged: (value) {
-                        setState(() {
-                          isDarkMode = value;
-                        });
+                        themeProvider.toggleTheme(value);
                       },
                       activeColor: Colors.blue,
                     ),
@@ -116,15 +113,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                     ),
                     IconButton(
-                      icon: const Icon(Icons.settings, size: 30),
-                      color: isDarkMode ? Colors.blue : Colors.black,
+                      icon: const Icon(Icons.article, size: 30),
+                      color: isDarkMode ? Colors.white54 : Colors.black54,
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
+                        Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => const SettingsScreen(),
+                            builder: (_) =>  WeatherForecastNext(),
                           ),
                         );
                       },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.settings, size: 30),
+                      color: isDarkMode ? Colors.blue : Colors.black,
+                      onPressed: () {},
                     ),
                   ],
                 ),
