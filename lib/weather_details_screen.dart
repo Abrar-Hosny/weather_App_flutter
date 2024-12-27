@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'settings.dart';
-=======
 import 'package:weather_app/settings.dart';
 
 class WeatherService {
@@ -265,16 +264,6 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                               IconButton(
                                 icon: const Icon(Icons.settings,
                                     color: Colors.white54, size: 30),
-<<<<<<< HEAD
-                                onPressed: () =>
-                                {
-                                Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                builder: (_) => const SettingsScreen()),
-                                )
-                                }
-
-=======
                                 onPressed: () {
                                   Navigator.push(
                                     context,
@@ -283,7 +272,6 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                                     ),
                                   );
                                 },
->>>>>>> bdcd8273860d131d68f3033afe04bf1ac1ec7058
                               ),
                             ],
                           ),
