@@ -94,23 +94,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         );
                       },
                     ),
-<<<<<<< HEAD
-                    IconButton(
-                      icon: const Icon(Icons.search,
-                          color: Colors.white54, size: 30),
-                      onPressed: _showSearchDialog,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.settings, color: Colors.blue, size: 30),
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                              builder: (_) => const SettingsScreen()),
-                        );
-                      },
-                    ),
-=======
->>>>>>> bdcd8273860d131d68f3033afe04bf1ac1ec7058
                   ],
                 ),
               ),
