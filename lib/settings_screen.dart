@@ -2,12 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/theme_provider.dart';
 import 'weather_details_screen.dart';
+<<<<<<< HEAD:lib/settings_screen.dart
 import 'weather_forecast_next.dart';
+=======
+import '/services/auth_service.dart';
+import '/login_screen.dart'; 
+>>>>>>> b26844a58510f36a3ca6791a96809e9939d80602:lib/settings.dart
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
+<<<<<<< HEAD:lib/settings_screen.dart
+=======
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool isDarkMode = true;
+  final _authService = AuthService();
+
+  Future<void> _handleSignOut() async {
+    try {
+      await _authService.signOut();
+      if (mounted) {
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+          (route) => false,
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error signing out: ${e.toString()}')),
+        );
+      }
+    }
+  }
+
+  @override
+>>>>>>> b26844a58510f36a3ca6791a96809e9939d80602:lib/settings.dart
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
@@ -75,6 +109,7 @@ class SettingsScreen extends StatelessWidget {
                       : Colors.black.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                 ),
+<<<<<<< HEAD:lib/settings_screen.dart
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -92,6 +127,19 @@ class SettingsScreen extends StatelessWidget {
                       },
                       activeColor: Colors.blue,
                     ),
+=======
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: const Icon(Icons.logout, color: Colors.white),
+                      title: const Text(
+                        'Sign Out',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onTap: _handleSignOut,
+                    ),
+                    // You can add more settings options here
+>>>>>>> b26844a58510f36a3ca6791a96809e9939d80602:lib/settings.dart
                   ],
                 ),
               ),
@@ -113,6 +161,7 @@ class SettingsScreen extends StatelessWidget {
                       },
                     ),
                     IconButton(
+<<<<<<< HEAD:lib/settings_screen.dart
                       icon: const Icon(Icons.article, size: 30),
                       color: isDarkMode ? Colors.white54 : Colors.black54,
                       onPressed: () {
@@ -128,6 +177,14 @@ class SettingsScreen extends StatelessWidget {
                       color: isDarkMode ? Colors.blue : Colors.black,
                       onPressed: () {},
                     ),
+=======
+                      icon: const Icon(Icons.settings,
+                          color: Colors.white, size: 30),
+                      onPressed: () {
+                        // Already on settings screen
+                      },
+                    ),
+>>>>>>> b26844a58510f36a3ca6791a96809e9939d80602:lib/settings.dart
                   ],
                 ),
               ),

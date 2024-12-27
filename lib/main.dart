@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:provider/provider.dart';
 import 'theme.dart';
 import 'providers/theme_provider.dart';
@@ -29,3 +30,27 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+=======
+import 'login_screen.dart';
+import 'signup_screen.dart';
+import 'weather_details_screen.dart';
+import 'weather_forecast_next.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MaterialApp(
+    initialRoute: '/signup',
+    routes: {
+      '/login': (context) => const LoginScreen(),
+      '/signup': (context) => const SignUpScreen(),
+      '/weather_details': (context) => const WeatherDetailsScreen(),
+      '/weather_forecast_next': (context) => WeatherForecastNext(),
+    },
+  ));
+}
+>>>>>>> b26844a58510f36a3ca6791a96809e9939d80602
