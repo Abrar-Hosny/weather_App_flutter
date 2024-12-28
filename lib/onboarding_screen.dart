@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'gradient_button.dart';
-import 'weather_details_screen.dart';
+import 'login_screen.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -57,7 +57,7 @@ class OnboardingScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                          builder: (_) => const WeatherDetailsScreen()),
+                          builder: (_) => const LoginScreen()),
                     );
                   },
                 ),

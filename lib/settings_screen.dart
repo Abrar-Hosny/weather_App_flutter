@@ -4,7 +4,7 @@ import 'providers/theme_provider.dart';
 import 'weather_details_screen.dart';
 import 'weather_forecast_next.dart';
 import '/services/auth_service.dart';
-import '/login_screen.dart';
+import 'login_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);

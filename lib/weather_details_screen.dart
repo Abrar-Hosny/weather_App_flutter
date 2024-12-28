@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'settings_screen.dart'; // Assuming SettingsScreen is in this file
+import 'weather_forecast_next.dart'; // Assuming this file exists
 
 class WeatherService {
   final String apiKey = '18feae854691456cb6c114106232710';
@@ -162,8 +163,8 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
             ),
           )
               : RefreshIndicator(
-            onRefresh: () => _loadWeatherData(
-                _weatherData?.location ?? 'Alexandria'),
+            onRefresh: () =>
+                _loadWeatherData(_weatherData?.location ?? 'Alexandria'),
             color: Colors.white,
             backgroundColor: const Color(0xFF2C1F63),
             child: ListView(
@@ -259,13 +260,25 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                       onPressed: _showSearchDialog,
                     ),
                     IconButton(
+                      icon: const Icon(Icons.article,
+                          color: Colors.white54, size: 30),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => WeatherForecastNext(),
+                          ),
+                        );
+                      },
+                    ),
+                    IconButton(
                       icon: const Icon(Icons.settings,
                           color: Colors.white54, size: 30),
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SettingsScreen(),
+                            builder: (context) =>
+                            const SettingsScreen(),
                           ),
                         );
                       },

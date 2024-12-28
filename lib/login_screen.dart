@@ -101,10 +101,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 40),
-
-
-                const SizedBox(height: 40),
-
                 _buildTextField(
                   controller: _emailController,
                   hintText: 'Email Address',
@@ -156,10 +152,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color:Colors.black
+                      color: Colors.black,
                     ),
                   ),
-<<<<<<< HEAD
                 ),
                 const SizedBox(height: 24),
                 Row(
@@ -168,13 +163,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text(
                       'Don\'t have an account? ',
                       style: TextStyle(color: Colors.black54),
-=======
-                  const SizedBox(height: 40),
-                  Center(
-                    child: Image.asset(
-                      'assets/Weather.png',
-                      height: 200,
->>>>>>> 986c7ab02ea31b0b8fcca231f7b1d4c9feaad345
                     ),
                     TextButton(
                       onPressed: () {
@@ -189,6 +177,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(height: 40),
+                Center(
+                  child: Image.asset(
+                    'assets/Weather.png',
+                    height: 200,
+                  ),
                 ),
               ],
             ),
