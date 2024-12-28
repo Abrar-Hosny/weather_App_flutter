@@ -2,24 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/theme_provider.dart';
 import 'weather_details_screen.dart';
-<<<<<<< HEAD:lib/settings_screen.dart
 import 'weather_forecast_next.dart';
-=======
 import '/services/auth_service.dart';
-import '/login_screen.dart'; 
->>>>>>> b26844a58510f36a3ca6791a96809e9939d80602:lib/settings.dart
+import '/login_screen.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
-<<<<<<< HEAD:lib/settings_screen.dart
-=======
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  _SettingsScreenState createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool isDarkMode = true;
   final _authService = AuthService();
 
   Future<void> _handleSignOut() async {
@@ -28,7 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       if (mounted) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const LoginScreen()),
-          (route) => false,
+              (route) => false,
         );
       }
     } catch (e) {
@@ -41,7 +35,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   @override
->>>>>>> b26844a58510f36a3ca6791a96809e9939d80602:lib/settings.dart
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
@@ -109,7 +102,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       : Colors.black.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(15),
                 ),
-<<<<<<< HEAD:lib/settings_screen.dart
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -127,21 +119,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                       activeColor: Colors.blue,
                     ),
-=======
-                child: Column(
-                  children: [
-                    ListTile(
-                      leading: const Icon(Icons.logout, color: Colors.white),
-                      title: const Text(
-                        'Sign Out',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onTap: _handleSignOut,
-                    ),
-                    // You can add more settings options here
->>>>>>> b26844a58510f36a3ca6791a96809e9939d80602:lib/settings.dart
                   ],
                 ),
+              ),
+              const SizedBox(height: 20),
+              ListTile(
+                leading: const Icon(Icons.logout, color: Colors.white),
+                title: Text(
+                  'Sign Out',
+                  style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+                ),
+                onTap: _handleSignOut,
               ),
               const Spacer(),
               Container(
@@ -161,13 +149,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       },
                     ),
                     IconButton(
-<<<<<<< HEAD:lib/settings_screen.dart
                       icon: const Icon(Icons.article, size: 30),
                       color: isDarkMode ? Colors.white54 : Colors.black54,
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) =>  WeatherForecastNext(),
+                            builder: (_) => WeatherForecastNext(),
                           ),
                         );
                       },
@@ -175,16 +162,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     IconButton(
                       icon: const Icon(Icons.settings, size: 30),
                       color: isDarkMode ? Colors.blue : Colors.black,
-                      onPressed: () {},
-                    ),
-=======
-                      icon: const Icon(Icons.settings,
-                          color: Colors.white, size: 30),
                       onPressed: () {
                         // Already on settings screen
                       },
                     ),
->>>>>>> b26844a58510f36a3ca6791a96809e9939d80602:lib/settings.dart
                   ],
                 ),
               ),

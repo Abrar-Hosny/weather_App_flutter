@@ -1,13 +1,7 @@
-// weather_service.dart
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'settings_screen.dart';
-=======
-import 'settings.dart';
-import 'package:weather_app/settings.dart';
->>>>>>> b26844a58510f36a3ca6791a96809e9939d80602
+import 'package:http/http.dart' as http;
+import 'settings_screen.dart'; // Assuming SettingsScreen is in this file
 
 class WeatherService {
   final String apiKey = '18feae854691456cb6c114106232710';
@@ -148,7 +142,8 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
         child: SafeArea(
           child: _isLoading
               ? const Center(
-              child: CircularProgressIndicator(color: Colors.white))
+            child: CircularProgressIndicator(color: Colors.white),
+          )
               : _error.isNotEmpty
               ? Center(
             child: Column(
@@ -170,7 +165,7 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
             onRefresh: () => _loadWeatherData(
                 _weatherData?.location ?? 'Alexandria'),
             color: Colors.white,
-            backgroundColor: Color(0xFF2C1F63),
+            backgroundColor: const Color(0xFF2C1F63),
             child: ListView(
               physics: const AlwaysScrollableScrollPhysics(),
               padding: const EdgeInsets.all(20.0),
@@ -194,130 +189,30 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                         width: 120,
                         height: 120,
                       ),
-<<<<<<< HEAD
                       const SizedBox(height: 20),
-                      Text(
-                        '${_weatherData?.temperature.round()}°',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 64,
-                          fontWeight: FontWeight.bold,
-                        ),
-=======
-                    )
-                  : RefreshIndicator(
-                      onRefresh: () => _loadWeatherData(
-                          _weatherData?.location ?? 'Alexandria'),
-                      color: Colors.white,
-                      backgroundColor: Color(0xFF2C1F63),
-                      child: ListView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        padding: const EdgeInsets.all(20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _weatherData?.location ?? '',
+                            '${_weatherData?.temperature.round()}',
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 24,
+                              fontSize: 64,
                               fontWeight: FontWeight.bold,
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.5,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.network(
-                                  'https:${_weatherData?.icon}',
-                                  width: 120,
-                                  height: 120,
-                                ),
-                                const SizedBox(height: 20),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${_weatherData?.temperature.round()}',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 64,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const Padding(
-                                      padding: EdgeInsets.only(top: 8.0),
-                                      child: Text(
-                                        '°',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 40,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  _weatherData?.condition ?? '',
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ],
+                          const Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: Text(
+                              '°',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                              ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              WeatherMetric(
-                                icon: Icons.air,
-                                value: '${_weatherData?.windSpeed.round()}km/h',
-                                label: 'Wind',
-                              ),
-                              WeatherMetric(
-                                icon: Icons.water_drop,
-                                value: '${_weatherData?.humidity}%',
-                                label: 'Humidity',
-                              ),
-                              const WeatherMetric(
-                                icon: Icons.umbrella,
-                                value: '0%',
-                                label: 'Rain',
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 100),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.home,
-                                    color: Colors.blue, size: 30),
-                                onPressed: () {},
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.search,
-                                    color: Colors.white54, size: 30),
-                                onPressed: _showSearchDialog,
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.settings,
-                                    color: Colors.white54, size: 30),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SettingsScreen(),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
                         ],
->>>>>>> b26844a58510f36a3ca6791a96809e9939d80602
                       ),
                       Text(
                         _weatherData?.condition ?? '',
@@ -329,11 +224,95 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                     ],
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    WeatherMetric(
+                      icon: Icons.air,
+                      value: '${_weatherData?.windSpeed.round()}km/h',
+                      label: 'Wind',
+                    ),
+                    WeatherMetric(
+                      icon: Icons.water_drop,
+                      value: '${_weatherData?.humidity}%',
+                      label: 'Humidity',
+                    ),
+                    const WeatherMetric(
+                      icon: Icons.umbrella,
+                      value: '0%',
+                      label: 'Rain',
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 100),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.home,
+                          color: Colors.blue, size: 30),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.search,
+                          color: Colors.white54, size: 30),
+                      onPressed: _showSearchDialog,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.settings,
+                          color: Colors.white54, size: 30),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SettingsScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class WeatherMetric extends StatelessWidget {
+  final IconData icon;
+  final String value;
+  final String label;
+
+  const WeatherMetric({
+    Key? key,
+    required this.icon,
+    required this.value,
+    required this.label,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Icon(
+          icon,
+          color: Colors.white,
+          size: 30,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          value,
+          style: const TextStyle(color: Colors.white, fontSize: 18),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white70, fontSize: 16),
+        ),
+      ],
     );
   }
 }
